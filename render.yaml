@@ -1,0 +1,14 @@
+# Render "Blueprint": New + > Blueprint > pick this repo. Free plan sleeps when idle (cold start ~30-60 s).
+services:
+  - type: web
+    name: flight-log-copilot
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements-demo.txt
+    startCommand: python -m app.web --demo --host 0.0.0.0
+    healthCheckPath: /api/config
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: FLC_DEMO
+        value: "1"

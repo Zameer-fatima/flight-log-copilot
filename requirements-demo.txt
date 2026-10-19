@@ -1,0 +1,2 @@
+# Minimal runtime for the public demo (FLC_DEMO=1): AI diagnosis is disabled there, so no anthropic.
+pymavlink>=2.4

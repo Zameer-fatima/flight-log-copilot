@@ -1,0 +1,9 @@
+# Parser for plain text logs: standard library only.
+# .tlog / .bin reading (MAVLink + ArduPilot dataflash):
+pymavlink>=2.4
+# AI diagnosis (--diagnose), official Anthropic SDK (imported lazily):
+anthropic>=1
+# Development tools:
+pytest>=8
+ruff>=0.5
+mypy>=1.10

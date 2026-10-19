@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Flight Log Copilot</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%234f46e5'/%3E%3Cpath d='M6 17l20-9-7 17-3-7z' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap hero-inner">
+      <div class="brand">
+        <svg class="logo" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" class="logo-bg"/><path d="M6 17l20-9-7 17-3-7z" class="logo-fg"/></svg>
+        <div>
+          <h1>Flight Log Copilot</h1>
+          <p class="tagline">Find out what went wrong, and where to look.</p>
+        </div>
+      </div>
+      <div class="hero-right">
+        <ul class="pills" aria-label="Supported inputs">
+          <li>.tlog</li><li>.BIN</li><li>App crashes</li><li>Text logs</li>
+        </ul>
+        <button id="theme" class="icon-btn" type="button" aria-label="Toggle light/dark theme" title="Toggle theme">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9c0-.5-.05-1-.14-1.5A6 6 0 0 1 13.5 3.14 9.2 9.2 0 0 0 12 3z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div id="demo-banner" class="demo-banner" role="note" hidden></div>
+    <section class="card" aria-labelledby="h-input">
+      <h2 id="h-input"><span class="step">1</span> Choose what to analyze</h2>
+      <div class="grid2">
+        <div class="tile">
+          <h3>Flight or crash log</h3>
+          <label id="drop" class="drop" tabindex="0">
+            <input id="file" type="file" hidden accept=".tlog,.bin,.BIN,.log,.txt,.crash,.out,text/plain">
+            <svg viewBox="0 0 24 24" class="drop-icon" aria-hidden="true"><path d="M12 16V4m0 0L7 9m5-5l5 5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+            <strong>Drop a file here</strong>
+            <span id="drop-hint" class="muted">or click to browse (.tlog, .BIN, crash text)</span>
+          </label>
+          <div id="path-row" class="row">
+            <input id="path" type="text" spellcheck="false" aria-label="Local file path"
+              placeholder="…or a local path (best for big logs)">
+            <button id="analyze-path" type="button">Analyze path</button>
+          </div>
+        </div>
+        <div class="tile" id="tile-crash">
+          <h3>Why did my app crash?</h3>
+          <p class="muted tile-text">Reads systemd-coredump records: signal, crash location, repeats and missing cores.</p>
+          <div class="row">
+            <input id="crash-name" type="text" spellcheck="false" aria-label="Program name"
+              placeholder="Program name, e.g. my-gcs-app">
+            <button id="crashes" class="primary" type="button">Analyze crashes</button>
+          </div>
+        </div>
+      </div>
+      <div class="samples" id="samples">
+        <span class="muted">No file handy? Try a sample:</span>
+        <button class="ghost small" type="button" data-sample="tlog">Flight telemetry (.tlog)</button>
+        <button class="ghost small" type="button" data-sample="bin">ArduPilot log (.BIN)</button>
+        <button class="ghost small" type="button" data-sample="crash">App crash report</button>
+        <button class="ghost small" type="button" data-sample="text">Text log</button>
+      </div>
+      <details class="paste">
+        <summary>Or paste log / crash text</summary>
+        <textarea id="input" rows="6" spellcheck="false"
+          placeholder="2024-03-14 10:15:04 [ERROR] Mission transfer failed at item 7"></textarea>
+        <div class="row"><button id="parse" type="button">Analyze pasted text</button></div>
+      </details>
+      <div id="current-file" class="current-file" hidden></div>
+      <p id="status" class="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <div id="loading" class="loading" hidden aria-hidden="true">
+      <div class="skeleton wide"></div><div class="skeleton"></div><div class="skeleton"></div>
+    </div>
+
+    <section id="results" hidden>
+      <div id="verdict" class="verdict"></div>
+
+      <div class="card">
+        <h2><span class="step">2</span> Overview</h2>
+        <div id="source" class="chips"></div>
+        <div id="counts" class="counts"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2><span class="step">3</span> Findings <span id="findings-count" class="tag"></span></h2>
+          <div class="row tight">
+            <div id="finding-filters" class="row tight"></div>
+            <button id="toggle-all" class="ghost small" type="button">Expand all</button>
+          </div>
+        </div>
+        <div id="findings"></div>
+        <button id="more-findings" class="ghost" type="button" hidden></button>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h2><span class="step">4</span> Events</h2>
+          <input id="search" type="search" class="search" placeholder="Search events…" aria-label="Search events">
+        </div>
+        <div class="row tight" id="filters"></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>#</th><th>Time</th><th>Level</th><th>Message</th><th>Item</th></tr></thead>
+            <tbody id="events"></tbody>
+          </table>
+        </div>
+        <p id="truncated" class="muted" hidden></p>
+        <div id="malformed-box" hidden>
+          <h3>Malformed lines</h3>
+          <ul id="malformed"></ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2><span class="step">5</span> AI diagnosis <span class="tag">optional</span></h2>
+        <p class="muted">Sends the problem events and findings (home paths scrubbed) to the configured LLM.
+          Needs <code>ANTHROPIC_API_KEY</code> in the server's environment.</p>
+        <button id="diagnose" class="primary" type="button">Diagnose with AI</button>
+        <div id="diagnosis" hidden></div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="foot" class="wrap foot">Runs locally. Findings are computed by code from your data; AI output is a lead, not a verdict.</footer>
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+           PID: 4000 (demo-gcs)
+           UID: 1000 (demo)
+        Signal: 11 (SEGV)
+     Timestamp: Tue 2025-03-04 10:20:10 UTC (2 weeks ago)
+  Command Line: /opt/demo-gcs/bin/demo-gcs
+    Executable: /opt/demo-gcs/bin/demo-gcs
+       Storage: /var/lib/systemd/coredump/core.demo-gcs.4000 (missing)
+       Message: Process 4000 (demo-gcs) of user 1000 dumped core.
+
+                Stack trace of thread 4000:
+                #0  0x00007f3a1c2b2845 QObject::property(char const*) const (/opt/qt/6.6.3/lib/libQt6Core.so.6.6.3 + 0x1b2845)
+                #1  0x0000000101000014 n/a (n/a + 0x0)
+
+           PID: 4001 (demo-gcs)
+           UID: 1000 (demo)
+        Signal: 11 (SEGV)
+     Timestamp: Tue 2025-03-05 11:21:10 UTC (2 weeks ago)
+  Command Line: /opt/demo-gcs/bin/demo-gcs
+    Executable: /opt/demo-gcs/bin/demo-gcs
+       Storage: /var/lib/systemd/coredump/core.demo-gcs.4001 (missing)
+       Message: Process 4001 (demo-gcs) of user 1000 dumped core.
+
+                Stack trace of thread 4001:
+                #0  0x00007f3a1c2b2845 QObject::property(char const*) const (/opt/qt/6.6.3/lib/libQt6Core.so.6.6.3 + 0x1b2845)
+                #1  0x0000000101000014 n/a (n/a + 0x0)
+
+           PID: 4002 (demo-gcs)
+           UID: 1000 (demo)
+        Signal: 11 (SEGV)
+     Timestamp: Tue 2025-03-06 12:22:10 UTC (2 weeks ago)
+  Command Line: /opt/demo-gcs/bin/demo-gcs
+    Executable: /opt/demo-gcs/bin/demo-gcs
+       Storage: /var/lib/systemd/coredump/core.demo-gcs.4002 (missing)
+       Message: Process 4002 (demo-gcs) of user 1000 dumped core.
+
+                Stack trace of thread 4002:
+                #0  0x00007f3a1c2b2845 QObject::property(char const*) const (/opt/qt/6.6.3/lib/libQt6Core.so.6.6.3 + 0x1b2845)
+                #1  0x0000000101000014 n/a (n/a + 0x0)
+
+           PID: 4003 (demo-gcs)
+           UID: 1000 (demo)
+        Signal: 11 (SEGV)
+     Timestamp: Tue 2025-03-07 13:23:10 UTC (2 weeks ago)
+  Command Line: /opt/demo-gcs/bin/demo-gcs
+    Executable: /opt/demo-gcs/bin/demo-gcs
+       Storage: /var/lib/systemd/coredump/core.demo-gcs.4003 (missing)
+       Message: Process 4003 (demo-gcs) of user 1000 dumped core.
+
+                Stack trace of thread 4003:
+                #0  0x00007f3a1c2b2845 QObject::property(char const*) const (/opt/qt/6.6.3/lib/libQt6Core.so.6.6.3 + 0x1b2845)
+                #1  0x0000000101000014 n/a (n/a + 0x0)
+
+           PID: 4004 (demo-gcs)
+           UID: 1000 (demo)
+        Signal: 11 (SEGV)
+     Timestamp: Tue 2025-03-08 14:24:10 UTC (2 weeks ago)
+  Command Line: /opt/demo-gcs/bin/demo-gcs
+    Executable: /opt/demo-gcs/bin/demo-gcs
+       Storage: /var/lib/systemd/coredump/core.demo-gcs.4004 (missing)
+       Message: Process 4004 (demo-gcs) of user 1000 dumped core.
+
+                Stack trace of thread 4004:
+                #0  0x00007f3a1c2b2845 QObject::property(char const*) const (/opt/qt/6.6.3/lib/libQt6Core.so.6.6.3 + 0x1b2845)
+                #1  0x0000000101000014 n/a (n/a + 0x0)
+
+           PID: 4100 (demo-gcs)
+           UID: 1000 (demo)
+        Signal: 6 (ABRT)
+     Timestamp: Fri 2025-03-07 16:40:02 UTC (2 weeks ago)
+  Command Line: /opt/demo-gcs/bin/demo-gcs
+    Executable: /opt/demo-gcs/bin/demo-gcs
+       Storage: /var/lib/systemd/coredump/core.demo-gcs.4100 (missing)
+       Message: Process 4100 (demo-gcs) of user 1000 dumped core.
+
+                Stack trace of thread 4100:
+                #0  0x00007f3a1b0969fc __pthread_kill_implementation (/lib/x86_64-linux-gnu/libc.so.6 + 0x969fc)
+                #1  0x00007f3a1b042476 raise (/lib/x86_64-linux-gnu/libc.so.6 + 0x42476)
+                #2  0x00007f3a1b0287f3 abort (/lib/x86_64-linux-gnu/libc.so.6 + 0x287f3)
+                #3  0x00007f3a1b089637 __libc_message (/lib/x86_64-linux-gnu/libc.so.6 + 0x89637)
+                #4  0x00007f3a1b0a0cbc malloc_printerr (/lib/x86_64-linux-gnu/libc.so.6 + 0xa0cbc)
+                #5  0x00007f3a1b0a2a14 _int_free (/lib/x86_64-linux-gnu/libc.so.6 + 0xa2a14)
+                #6  0x00007f3a1b0a5413 free (/lib/x86_64-linux-gnu/libc.so.6 + 0xa5413)
+                #7  0x00007f3a1c2cd1f0 QVariant::~QVariant() (/opt/qt/6.6.3/lib/libQt6Core.so.6.6.3 + 0x1cd1f0)
+

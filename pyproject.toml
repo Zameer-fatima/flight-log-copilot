@@ -1,0 +1,28 @@
+[project]
+name = "flight-log-copilot"
+version = "0.1.0"
+description = "Deterministic GCS/drone mission log parser (Phase 1)"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+ai = ["anthropic>=1"]
+binary = ["pymavlink>=2.4"]
+all = ["anthropic>=1", "pymavlink>=2.4"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+strict = true
+
+[[tool.mypy.overrides]]
+module = ["pymavlink", "pymavlink.*"]
+ignore_missing_imports = true

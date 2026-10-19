@@ -1,0 +1,14 @@
+2024-03-14 10:15:00.000 [INFO] GCS link established with vehicle 1
+2024-03-14 10:15:02.120 [INFO] Mission upload started (20 items)
+2024-03-14 10:15:02.340 [DEBUG] Sending mission item 0
+2024-03-14 10:15:02.560 [DEBUG] Sending mission item 6
+2024-03-14 10:15:02.780 [DEBUG] Item #7 Command MAV_CMD(16)
+2024-03-14 10:15:03.100 [WARNING] Link quality degraded: 62%
+2024-03-14 10:15:04.500 [ERROR] Mission transfer failed at item 7
+2024-03-14 10:15:04.510 [ERROR] Telemetry heartbeat timeout
+this line is not a valid log entry
+
+2024-03-14 10:15:05.000 [INFO] Retry initiated for mission upload
+2024-03-14 10:15:05.200 [DEBUG] Sending mission item 7
+2024-03-14 10:15:05.400 [DEBUG] Item #19 Command MAV_CMD(94)
+2024-03-14 10:15:06.000 [INFO] Mission transfer complete: 20 items acknowledged
